@@ -1,0 +1,20 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}
+Update user
+{% endblock title %}
+
+{% block content %}
+<br><br><br><br><br><br>
+<h2>Profile ma'lumotlarini  tahrirlash.</h2>
+<br>
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <br>
+    <button type="submit" class="btn btn-success">O'zgartirish</button>
+    <a  class="btn btn-primary" href="{% url 'user_profile' %}">Orqaga</a>
+</form>
+<br><br><br><br><br>
+{% endblock content %}

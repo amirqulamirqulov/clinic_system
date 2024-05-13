@@ -1,0 +1,22 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}
+login page
+{% endblock title %}
+
+{% block content %}
+<br><br><br><br><br><br>
+<h2>Web saytga kirish - Login</h2>
+<p>Saytga kirish uchun quyidagi formani to'ldiring.</p>
+<br>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-success">Login</button>
+</form>
+<br>
+{% comment %} <a href={% url 'password_reset' %} style="color: red;">Parolingizni unutdingizmi?</a> {% endcomment %}
+<br><br>
+
+{% endblock content %}

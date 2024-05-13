@@ -1,0 +1,43 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+
+{% block content %}
+<br><br><br><br><br><br>
+<h2 style='margin-left:20px;'>Xush kelibsiz.   {{ user.username }}</h2>
+<br>
+<h3 style='margin-left:20px;'>Siz haqingizda ma'lumot</h3>
+
+<ul style="margin-left:20px;">
+    {% if user.image %}
+    <li><img src="{{ user.image.url }}" style="width:200px; height:200px;"></li>
+    {% else %}
+    <li><img src="" style="width:200px; height:200px;"></li>
+    {% endif %}
+    <br>
+    <li>Tug'ilgan kun: {{user.date_of_birth}}</li>
+    <li> Username: {{user.username}}</li>
+    <li> Ism: {{user.first_name}} </li>
+    <li> Familiya: {{user.last_name}} </li>
+    <li> Email: {{user.email}} </li>
+    <li> Telefon raqam: {{user.phone_number}} </li>
+    <li> Role: {{user.role}} </li>
+    <li> Address: {{user.user_address}} </li>
+    <li> Jinsi: {{user.gender}} </li>
+    {% if user.role == 'doctor' %}
+    <li> Mutaxasislik: {{user.specialization}} </li>
+    <li> Bir marta tekshiruv narxi: {{user.price}} </li>
+    {% endif %}
+</ul>
+<br>
+<a style="color: red;" href={% url 'password_change' %}>Change password</a>
+
+<a style="color: green; margin-left: 15px;" href="{% url 'logout' %}">Log Out</a>
+<a style="color: blue; margin-left: 15px;" href={% url 'update_user' %}>Tahrirlash</a>
+<br><br><br><br>
+
+{% endblock content %}

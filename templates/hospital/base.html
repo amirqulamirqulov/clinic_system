@@ -1,0 +1,146 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    <title>{% block title %} {% endblock title %}</title>
+    
+    <link rel="shortcut icon" href="{% static 'images/fav.jpg'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawsom-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+ 
+<body>
+
+    <!-- ################# Header Starts Here#######################-->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 left-item">
+                        <ul>
+                            <li><i class="fas fa-envelope-square"></i> amirqulamirqulov9@gmail.com</li>
+                            <li><i class="fas fa-phone-square"></i> +998 93 823 10 04</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block right-item">
+                        <ul>
+                            <li><a href="https://github.com/amirqulamirqulov"><i class="fab fa-github"></i></a></li>
+                            <li><a href="https://www.instagram.com/amir_1oo4"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/amir74809"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://facebook.com/amirqulamirqulov"><i class="fab fa-facebook-f"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="nav-head" class="header-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3 no-padding col-sm-12 nav-img">
+                        <img src={% static "images/logo.jpg" %} alt="">
+                       <a data-toggle="collapse" data-target="#menu" href="#menu" ><i class="fas d-block d-md-none small-menu fa-bars"></i></a>
+                    </div>
+                    <div id="menu" class="col-lg-9 col-md-9 d-none d-md-block nav-item">
+                        <ul>
+                            <li><a href={% url "home" %}>Bosh sahifa</a></li>
+                            <li><a href={% url "about"%}>Biz haqimizda</a></li>
+                            <li><a href={% url "services" %}>Xizmatlar</a></li>
+                            {% if request.user.is_superuser %}
+                            <li><a href={% url "admin_page" %}>Admin</a></li>
+                            {% elif request.user.is_authenticated and not request.user.is_superuser %}
+                            <li><a href={% url "appoinment" %}>Uchrashuvlar</a></li>
+                            <li><a href={% url "prescription" %}>Retseptlar</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-1" style="flex">
+                        <div class="d-flex"> 
+                            {% if request.user.is_authenticated %}
+                            <a href={% url 'user_profile' %} style="width:100px;">My profile</a>
+                            <a href={% url 'logout' %} style="width:100px;">Log out</a>
+                            {% else %}
+                            <a href={% url 'login' %} style="width:100px;">Sign in</a>
+                            <a href={% url 'user_register' %} style="width:100px;">Sign up</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </header>
+
+    {% block content %}
+
+    {% endblock content %} 
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <h2>Biz haqimizda</h2>
+                    <p>
+                        Kasalxona kardiologiya, nevrologiya, umumiy terapiya va fizioterapiya yo'nalishlariga ixtisoslashgan. Poliklinikada shifokorlar ta'minlanadi: urolog, ginekolog, kardiolog, dermatolog, endokrinolog, otorinolaringolog, nevrolog, oftalmolog va terapevt. Sog'liqni saqlash mutaxassislariga ishonishingizga amin bo'lishingiz mumkin.
+                    </p>
+                    
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <h2>Foydali havolalar</h2>
+                    <ul class="list-unstyled link-list">
+                        <li><a ui-sref="about" href={% url "about" %}>Biz haqimizda</a><i class="fa fa-angle-right"></i></li>
+                        <li><a ui-sref="contact" href={% url "services" %}>Xizmatlar</a><i class="fa fa-angle-right"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-12 map-img">
+                    <h2>Bog'lanish</h2>
+                    <address class="md-margin-bottom-40">
+                        Buxoro viloyati <br>
+                        Jondor (K.K Tuman) <br>
+                        Pahlavon MFY, 508 <br>
+                        Phone: +998 938231004 <br>
+                        Email: <a href="mailto:info@anybiz.com" class="">amirqulamirqulov9@gmail.com</a><br>
+                       
+                    </address>
+
+                </div>
+            </div>
+        </div>
+        
+
+    </footer>
+    <div class="copy">
+            <div class="container">
+                <a href="#">2024 &copy; </a>
+                
+                <span>
+                <a href="https://github.com/amirqulamirqulov"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/amir_1oo4"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/amir74809"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com/amirqulamirqulov"><i class="fab fa-facebook-f"></i></a>
+                </span>
+            </div>
+
+        </div>
+
+</body>
+
+<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+<script src="{% static "js/popper.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "plugins/scroll-fixed/jquery-scrolltofixed-min.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
+
+
+</html>

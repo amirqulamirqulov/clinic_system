@@ -1,0 +1,153 @@
+{% extends "hospital/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<br> <br><br><br><br><br>
+<h2 style="margin-left: 40px;">Admin sahifasi</h2>
+<br>
+<h4 style="margin-left: 30px; color: black;">Shifokorlar ro'yxati</h4>
+<a href={% url 'create_doctor' %} ><button type="button" class="btn btn-success" style="margin-bottom: 8px; margin-left: 1130px;">Yangi shifokor qo'shish</button></a>
+<table class="table table-bordered table-striped" 
+style="margin-left: 50px;">
+    <tr>
+        <th style="text-align: center;">Username</th>
+        <th style="text-align: center;">Ism</th>
+        <th style="text-align: center;">Familiya</th>
+        <th style="text-align: center;">Rasm</th>
+        <th style="text-align: center;">Tug'ilgan kun</th>
+        <th style="text-align: center;">Mutaxasislik</th>
+        <th style="text-align: center;">Actions</th>
+    </tr> 
+    {% for doctor in doctors %}     
+    <tr>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{doctor.username}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{doctor.first_name}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{doctor.last_name}}</td>
+        {% if doctor.image  %}
+        <td style="width: 200px; text-align: center; "><img src="{{doctor.image.url}}" width="70%" ></td>
+        {% else %}
+        <td style="width: 200px; text-align: center; "><img src="" width="70%" ></td>
+        {% endif %}
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{doctor.date_of_birth}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{doctor.specialization}}</td>
+        <td style="text-align: center; vertical-align: middle;">
+            <button style="  border-radius: 5px;"  class = "btn btn-primary"><a href={% url 'update_doctor' doctor.pk %}>O'zgartirish</a></button>
+            <button style="  margin-right: 1px; border-radius: 5px;" class = "btn btn-danger"><a href={% url 'delete_doctor' doctor.pk %}>O'chirish</a></button>                
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+
+<p style="margin-left: 50px; margin-top:3px; font-size: 17px; color: black;"> Shifoxonadagi shifokorlar soni - {{count_doctors}}</p>
+
+<br>
+
+<h4 style="margin-left: 30px; color: black;">Bemorlar ro'yxati</h4>
+<table class="table table-bordered table-striped" 
+style="margin-left: 50px;">
+    <tr>
+        <th style="text-align: center;">Username</th>
+        <th style="text-align: center;">Ism</th>
+        <th style="text-align: center;">Familiya</th>
+        <th style="text-align: center;">Rasm</th>
+        <th style="text-align: center;">Tug'ilgan kun</th>
+        <th style="text-align: center;">Actions</th>
+    </tr> 
+    {% for patient in patients %}
+    <tr>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{patient.username}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black; width: 200px;">{{patient.first_name}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black; width: 200px;">{{patient.last_name}}</td>
+        {% if patient.image  %}
+        <td style="width: 200px; text-align: center; "><img src="{{patient.image.url}}" width="70%" ></td>
+        {% else %}
+        <td style="width: 200px; text-align: center; "><img src="" width="70%" ></td>
+        {% endif %}        
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{patient.date_of_birth}}</td>
+        <td style="text-align: center; vertical-align: middle;">
+            <button style="  border-radius: 5px;"  class = "btn btn-primary"><a href={% url 'update_patient' patient.pk %}>O'zgartirish</a></button>
+            <button style="  margin-right: 1px; border-radius: 5px;" class = "btn btn-danger"><a href={% url 'delete_patient' patient.pk %}>O'chirish</a></button>
+                   
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+
+<p style="margin-left: 50px; margin-top:3px; font-size: 17px; color: black;"> Ro'yxatdan o'tgan bemorlar soni - {{count_patients}}</p>
+
+<br>
+
+{% comment %} <h4 style="margin-left: 30px; color: black;">Adminlar ro'yxati</h4>
+<a href={% url 'create_admin' %} ><button type="button" class="btn btn-success" style="margin-bottom: 8px; margin-left: 1130px;">Yangi admin qo'shish</button></a>
+<table class="table table-bordered table-striped" 
+style="margin-left: 50px;">
+    <tr>
+        <th style="text-align: center;">Username</th>
+        <th style="text-align: center;">Ism</th>
+        <th style="text-align: center;">Familiya</th>
+        <th style="text-align: center;">Rasm</th>
+        <th style="text-align: center;">Tug'ilgan kun</th>
+        <th style="text-align: center;">Actions</th>
+    </tr> 
+    {% for admin in admins %}
+    <tr>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{admin.username}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{admin.first_name}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{admin.last_name}}</td>
+        {% if admin.image  %}
+        <td style="width: 200px; text-align: center; "><img src="{{admin.image.url}}" width="70%" ></td>
+        {% else %}
+        <td style="width: 200px; text-align: center; "><img src="" width="70%" ></td>
+        {% endif %}
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{admin.date_of_birth}}</td>
+        <td style="text-align: center; vertical-align: middle;">
+            <button style="  border-radius: 5px;"  class = "btn btn-primary"><a href={% url 'update_admin' admin.pk %}>O'zgartirish</a></button>
+            <button style="  margin-right: 1px; border-radius: 5px;" class = "btn btn-danger"><a href="">O'chirish</a></button>
+                   
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+
+<p style="margin-left: 50px; margin-top:3px; font-size: 17px; color: black;"> Adminlar soni - {{count_admins}}</p>
+
+<br> {% endcomment %}
+
+
+
+<h4 style="margin-left: 30px; color: black;">Shifoxonada mavjud bo'limlar</h4>
+<a href={% url 'create_speci' %} ><button type="button" class="btn btn-success" style="margin-bottom: 8px; margin-left: 1130px;">Yangi bo'lim qo'shish</button></a>
+<table class="table table-bordered table-striped" 
+style="margin-left: 50px;">
+    <tr>
+        <th style="text-align: center;">Nomi</th>
+        <th style="text-align: center;">Tavsif</th>
+        <th style="text-align: center;">Rasm</th>
+        <th style="text-align: center;">Actions</th>
+    </tr> 
+    {% for specialization in specializations %}
+    <tr>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{specialization.name}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black; width: 600px;">{{specialization.description}}</td>
+        {% if specialization.image  %}
+        <td style="width: 200px; text-align: center; "><img src="{{specialization.image.url}}" width="70%" ></td>
+        {% else %}
+        <td style="width: 200px; text-align: center; "><img src="" width="70%" ></td>
+        {% endif %}        
+        <td style="text-align: center; vertical-align: middle;">
+            <button style="  border-radius: 5px;"  class = "btn btn-primary"><a href={% url 'update_speci' specialization.pk %}>O'zgartirish</a></button>
+            <button style="  margin-right: 1px; border-radius: 5px;" class = "btn btn-danger"><a href={% url 'delete_speci' specialization.pk %}>O'chirish</a></button>
+                  
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+
+<p style="margin-left: 50px; margin-top:3px; font-size: 17px; color: black;"> Bo'limlar soni - {{count_specializations}}</p>
+
+<br>
+
+
+
+{% endblock content %}  

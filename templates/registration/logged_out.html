@@ -1,0 +1,15 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}
+logout page
+{% endblock title %}
+
+{% block content %}
+<br><br><br><br><br><br>
+<h2>Web saytdan chiqish - Logout</h2>
+<br>
+<p>Siz web saytdan chiqdingiz. <a href={% url 'login' %} >Qaytadan kirish</a></p>
+<br><br>
+
+{% endblock content %}

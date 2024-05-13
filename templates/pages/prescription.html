@@ -1,0 +1,55 @@
+{% extends "hospital/base.html" %} 
+{% load static %}
+
+
+{% block title %} Prescription   {% endblock title %}
+
+
+{% block content %}
+<br> <br><br><br><br><br>
+
+<h3 style="margin-left: 40px; color: black;">Tashxislar ro'yxati</h3>
+<br>
+{% if role == 'doctor' %}
+<a href={% url 'create_prescrip' %} ><button type="button" class="btn btn-success" style="margin-bottom: 8px; margin-left: 1130px;">Yangi tashxis qo'shish</button></a>
+{% endif %}
+<table class="table table-bordered table-striped" 
+style="margin-left: 50px;">
+    <tr>
+        {% if role == 'doctor' %}
+        <th style="text-align: center;">Bemor</th>
+        {% else %}
+        <th style="text-align: center;">Shifokor</th>
+        {% endif %}
+        <th style="text-align: center;">Uchrashuv vaqti</th>
+        <th style="text-align: center;">Tashxis</th>
+        {% if role == 'doctor' %}
+        <th style="text-align: center;">Actions</th>
+        {% endif %}
+    </tr> 
+    {% for prescription in prescriptions %}
+    <tr>
+        {% if role == 'doctor' %}
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{prescription.patient.username}}</td>
+        {% else %}
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{prescription.doctor.first_name}}</td>
+        {% endif %}
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{prescription.datetime}}</td>
+        <td style="text-align: center; vertical-align: middle;  color: black;">{{prescription.text}}</td>
+        {% if role == 'doctor' %}
+        <td style="text-align: center; vertical-align: middle;">
+            <button style="  border-radius: 5px;"  class = "btn btn-primary"><a href={% url 'update_prescrip' prescription.pk %}>O'zgartirish</a></button>
+            <button style="  margin-right: 1px; border-radius: 5px;" class = "btn btn-danger"><a href={% url 'delete_prescrip' prescription.pk %}>O'chirish</a></button>
+                   
+        </td>
+        {% endif %}
+    </tr>
+    {%endfor%}
+</table>
+
+<p style="margin-left: 50px; margin-top:3px; font-size: 17px; color: black;"> Tashxislar soni - {{count_prescriptions}}</p>
+
+<br>
+
+
+{% endblock content %}

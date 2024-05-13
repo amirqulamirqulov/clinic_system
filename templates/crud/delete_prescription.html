@@ -1,0 +1,23 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}
+Delete prescription
+{% endblock title %}
+
+
+{% block content %}
+<br><br><br><br><br><br>
+<div style="margin: 20px; padding-top: 20px;">
+    <h2>O'chirishni tasdiqlash</h2>
+    <br>
+    <h4>Tashxisni o'chirishni istaysizmi?</h4>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success" name="submit" value="yes">Tasdiqlayman</button>
+      <a class="btn btn-danger" href="{% url 'prescription' %}">Yo'q</a>
+    </form>
+</div>
+
+{% endblock content %}

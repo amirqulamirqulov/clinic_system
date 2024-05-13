@@ -1,0 +1,21 @@
+{% extends "hospital/base.html" %}
+{% load static %}
+
+
+{% block title %}
+ User register
+{% endblock title %}
+
+{% block content %}
+
+<br><br><br><br><br><br>
+
+<h2>Foydalanuvchini ro'yxatdan o'tkazish.</h2>
+<p>Ro'yxatdan o'tish uchun iltimos pastdagi formani to'ldiring.</p>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Sign up</button>
+</form>
+<br><br><br>
+{% endblock content %}

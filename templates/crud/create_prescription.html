@@ -1,0 +1,19 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}
+Prescription create
+{% endblock title %}
+
+{% block content %}
+<br><br><br><br><br><br>
+<h2>Tashxis yaratish.</h2>
+<br>
+<form method="post" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Yaratish</button>
+    <a  class="btn btn-primary" href="{% url 'prescription' %}">Orqaga</a>
+</form>
+<br><br><br>
+{% endblock content %}
