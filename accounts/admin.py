@@ -55,7 +55,7 @@ class UserAdmin(UserAdmin):
 
 @admin.register(VerificationOTP)
 class VerificationOtpAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'code', 'expires_in', 'is_active')
+    list_display = ('id', 'email', 'code', 'expires_in', 'is_active')
 
 
 

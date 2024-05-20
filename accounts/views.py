@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.views import View
 
-
 def adminpageview(request):
     doctors = User.objects.filter(role="doctor")
     patients = User.objects.filter(role="patient")
@@ -102,5 +101,21 @@ class UpdateUserView(View):
             return redirect('user_profile')
         else:
             return HttpResponse("Siz ma'lumotni noto'g'ri kiritdingiz.")
+        
+# class CustomPasswordResetView(PasswordResetView):
+#     form_class = PasswordResetForm
+#     email_template_name = 'registration/password_reset_email.html'
+#     success_url = reverse_lazy('password_reset_done')
+
+#     def form_valid(self, form):
+#         email = form.cleaned_data['email']
+#         code = send_otp_code()
+#         message = f'Kod: {code}'
+#         expires_in = timezone.now() + timezone.timedelta(minutes=3)
+#         VerificationOTP.objects.create(email=email, code=code, expires_in=expires_in)
+#         send_mail('Verify code', message, EMAIL_HOST_USER, [email], fail_silently=False)
+#         return super().form_valid(form)
+
+
         
 

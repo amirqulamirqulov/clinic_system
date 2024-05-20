@@ -58,9 +58,9 @@ class User(AbstractUser):
     
 class VerificationOTP(models.Model):
 
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='verification_otp')
+    email = models.EmailField(_("email"), null=True)
     code = models.IntegerField(_("otp code"))
-    expires_in = models.DateTimeField(_("expires in"))
+    expires_in = models.DateTimeField(_("expires in"), null=True)
     is_active = models.BooleanField(_("is active"), default=True)
 
 
