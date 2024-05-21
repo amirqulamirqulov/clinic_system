@@ -1,15 +1,12 @@
-# from django.core.mail import send_mail
-# from core.settings import EMAIL_HOST_USER
-# subject = 'Test Email'
-# message = 'This is a test email sent using SMTP in Django.'
-# from_email = EMAIL_HOST_USER
-# recipient_list = ['aamirchik19@example.com']
-
-# send_mail(subject, message, from_email, recipient_list)
+import pyotp
+from datetime import datetime, timedelta
 
 
-import random
-
-def send_otp_code():
-    return random.randint(10000, 99999)
+def send_otp(request):
+    totp = pyotp.TOTP(pyotp.random_base32(), interval=180)
+    otp = totp.now()
+    request.session['otp_secret_key']=totp.secret
+    valid_date = datetime.now() + timedelta(minutes=3)
+    request.session['otp_valid_date'] = str(valid_date)
+    return otp
 
